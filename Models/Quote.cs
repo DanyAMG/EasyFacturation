@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media.Animation;
+
+namespace EasyFacturation.Models
+{
+    public class Quote
+    {
+        [Key]
+        public Guid Id { get; set; }
+
+        [Required]
+        public int QuoteNumber { get; set; }
+
+        [Required]
+        public DateTime CreationDate { get; set; }
+
+        [Required]
+        public DateTime ExpirationDate { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Subtotal { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Total { get; set; }
+
+        [Required]
+        [Range(0,100)]
+        [Column(TypeName = "decimal(5,2)")]
+        public decimal TaxeRate { get; set; }
+
+        //Foreign Key
+        [Required]
+        public Guid ClientId { get; set; }
+        public Client Client { get; set; }
+
+        [Required]
+        public Guid AppOwnerId { get; set; }
+        public AppOwner AppOwner { get; set; }
+
+        public Invoice Invoice { get; set; }
+    }
+}
