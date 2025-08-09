@@ -1,4 +1,4 @@
-﻿using EasyFacturation.Data;
+﻿using EasyFacturation.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Data;

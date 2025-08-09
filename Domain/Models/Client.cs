@@ -1,14 +1,15 @@
-﻿using EasyFacturation.Ressources;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using EasyFacturation.Ressources;
 
-namespace EasyFacturation.Models
+namespace EasyFacturation.Domain.Models
 {
-    public class AppOwner : IValidatableObject
+    public class Client : IValidatableObject
     {
         [Key]
         public Guid Id { get; set; } //EF will generate automatically the value at the insertion
@@ -20,20 +21,11 @@ namespace EasyFacturation.Models
         public string FirstName { get; set; }
 
         [MaxLength(100)]
-        public string CompanyName { get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        public string CompanyNumber {  get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        public string TaxeNumber { get; set; }
+        public string CompanyName {  get; set; }
 
         [MaxLength(10)]
         public string StreetNumber { get; set; }
 
-        [Required]
         [MaxLength(100)]
         public string StreetName { get; set; }
 
@@ -43,22 +35,20 @@ namespace EasyFacturation.Models
         [MaxLength(100)]
         public string AdressLine2 { get; set; }
 
-        [Required]
         [MaxLength(100)]
         public string City { get; set; }
 
-        [Required]
         [MaxLength(10)]
         public string ZipCode { get; set; }
 
         [MaxLength(20)]
         [Phone(ErrorMessageResourceType = typeof(ValidationMessage),
             ErrorMessageResourceName = "InvalidPhoneNumber")]
-        public string Phone { get; set; }
+        public string Phone {  get; set; }
 
         [MaxLength(100)]
         [EmailAddress(ErrorMessageResourceType = typeof(ValidationMessage),
-        ErrorMessageResourceName = "InvalidEmailAdress")]
+            ErrorMessageResourceName= "InvalidEmailAdress")]
         public string Email { get; set; }
 
         /// <summary>

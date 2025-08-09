@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using EasyFacturation.Models;
+using EasyFacturation.Domain.Models;
 
-namespace EasyFacturation.Data
+namespace EasyFacturation.Infrastructure.Persistence
 {
     public class AppDbContext : DbContext
     {

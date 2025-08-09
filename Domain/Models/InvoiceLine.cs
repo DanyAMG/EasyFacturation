@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EasyFacturation.Models
+namespace EasyFacturation.Domain.Models
 {
     public class InvoiceLine
     {

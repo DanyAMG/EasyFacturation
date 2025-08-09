@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace EasyFacturation.Data
+namespace EasyFacturation.Infrastructure.Persistence
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {

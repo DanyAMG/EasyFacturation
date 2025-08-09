@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyFacturation.Models
+namespace EasyFacturation.Domain.Models
 {
     public class QuoteLine
     {

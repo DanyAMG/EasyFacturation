@@ -5,25 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyFacturation.Models
+namespace EasyFacturation.Domain.Models
 {
-    public class QuoteStatusHistory
+    public class InvoiceStatusHistory
     {
         [Key]
         public Guid Id { get; set; }
 
-        public enum QuoteStatus
+        
+        public enum InvoiceStatus
         {
             Waiting = 0,
-            Late = 1,
-            Reminded = 2,
-            Accepted = 3,
-            Refused = 4
+            PartiallyPaid = 1,
+            Paid = 2
         }
 
         //Foreign Key
         [Required]
-        public Guid QuoteId { get; set; }
-        public Quote Quote { get; set; }
+        public Guid InvoiceId { get; set; }
+        public Invoice Invoice { get; set; }
     }
 }

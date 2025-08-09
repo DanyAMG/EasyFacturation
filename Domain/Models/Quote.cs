@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 
-namespace EasyFacturation.Models
+namespace EasyFacturation.Domain.Models
 {
     public class Quote
     {
