@@ -5,26 +5,31 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 
-namespace EasyFacturation.Domain.Models
+namespace EasyFacturation.AppServices.DTOs
 {
-    public class Quote
+    internal class QuoteCreateDTO
     {
-        [Key]
-        public Guid Id { get; set; }
+        [Required]
         public int QuoteNumber { get; set; }
-        public DateTime CreationDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal Total { get; set; }
-        public decimal TaxeRate { get; set; }
 
-        //Foreign Key
-        public Guid ClientId { get; set; }
-        public Client Client { get; set; }
-        public Guid AppOwnerId { get; set; }
-        public AppOwner AppOwner { get; set; }
-        public Invoice Invoice { get; set; }
+        [Required]
+        public DateTime CreationDate { get; set; }
+
+        [Required]
+        public DateTime ExpirationDate { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Subtotal { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Total { get; set; }
+
+        [Required]
+        [Range(0, 100)]
+        [Column(TypeName = "decimal(5,2)")]
+        public decimal TaxeRate { get; set; }
     }
 }

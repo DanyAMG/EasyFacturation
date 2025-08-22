@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyFacturation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250809135136_InitialCreate")]
+    [Migration("20250821235435_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -28,67 +28,54 @@ namespace EasyFacturation.Migrations
 
                     b.Property<string>("AdressLine1")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AdressLine2")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyNumber")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StreetName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StreetNumber")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("TaxeNumber")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ZipCode")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -104,57 +91,49 @@ namespace EasyFacturation.Migrations
 
                     b.Property<string>("AdressLine1")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AdressLine2")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StreetName")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StreetNumber")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Title")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ZipCode")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -184,13 +163,13 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Subtotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("TaxeRate")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -221,7 +200,7 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal?>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
@@ -268,13 +247,13 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Subtotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("TaxeRate")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -302,7 +281,7 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<decimal?>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -338,7 +317,7 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("DefaultTaxRate")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Language")
                         .IsRequired()

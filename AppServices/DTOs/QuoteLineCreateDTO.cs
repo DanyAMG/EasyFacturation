@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyFacturation.Domain.Models
+namespace EasyFacturation.AppServices.DTOs
 {
-    public class QuoteLine
+    internal class QuoteLineCreateDTO
     {
-        [Key]
-        public Guid Id { get; set; }
+        [Required]
         public string Description { get; set; }
-        public decimal? UnitPrice { get; set; }
-        public decimal? Quantity { get; set; }
 
-        //Foreign Key
-        public Guid QuoteId { get; set; }
-        public Quote Quote { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal? UnitPrice { get; set; }
+
+        public decimal? Quantity { get; set; }
     }
 }

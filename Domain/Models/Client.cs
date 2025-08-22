@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 using EasyFacturation.Ressources;
 
 namespace EasyFacturation.Domain.Models
@@ -13,42 +7,17 @@ namespace EasyFacturation.Domain.Models
     {
         [Key]
         public Guid Id { get; set; } //EF will generate automatically the value at the insertion
-
-        [MaxLength(100)]
+        public ClientTitle Title { get; set; }
         public string LastName { get; set; }
-
-        [MaxLength(100)]
         public string FirstName { get; set; }
-
-        [MaxLength(100)]
         public string CompanyName {  get; set; }
-
-        [MaxLength(10)]
         public string StreetNumber { get; set; }
-
-        [MaxLength(100)]
         public string StreetName { get; set; }
-
-        [MaxLength(100)]
         public string AdressLine1 { get; set; }
-
-        [MaxLength(100)]
         public string AdressLine2 { get; set; }
-
-        [MaxLength(100)]
         public string City { get; set; }
-
-        [MaxLength(10)]
         public string ZipCode { get; set; }
-
-        [MaxLength(20)]
-        [Phone(ErrorMessageResourceType = typeof(ValidationMessage),
-            ErrorMessageResourceName = "InvalidPhoneNumber")]
         public string Phone {  get; set; }
-
-        [MaxLength(100)]
-        [EmailAddress(ErrorMessageResourceType = typeof(ValidationMessage),
-            ErrorMessageResourceName= "InvalidEmailAdress")]
         public string Email { get; set; }
 
         /// <summary>
@@ -68,6 +37,13 @@ namespace EasyFacturation.Domain.Models
                     new[] { nameof(FirstName), nameof(LastName), nameof(CompanyName) });
             }
             yield break;
+        }
+
+        public enum ClientTitle
+        {
+            Unknown,
+            Mr,
+            Mrs,
         }
     }
 }

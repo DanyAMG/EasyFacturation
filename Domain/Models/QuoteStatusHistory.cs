@@ -22,7 +22,6 @@ namespace EasyFacturation.Domain.Models
         }
 
         //Foreign Key
-        [Required]
         public Guid QuoteId { get; set; }
         public Quote Quote { get; set; }
     }

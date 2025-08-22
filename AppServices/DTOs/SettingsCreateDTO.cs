@@ -6,14 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyFacturation.Domain.Models
+namespace EasyFacturation.AppServices.DTOs
 {
-    public class Settings
+    internal class SettingsCreateDTO
     {
-        [Key]
-        public Guid Id { get; set; }
+        [Required]
         public string Language { get; set; }
+
+        [Required]
+        [Range(0, 100)]
+        [Column(TypeName = "decimal(5,2)")]
         public decimal DefaultTaxRate { get; set; }
-        public string Currency {  get; set; }
+
+        [Required]
+        public string Currency { get; set; }
     }
 }

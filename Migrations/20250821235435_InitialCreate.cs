@@ -16,19 +16,19 @@ namespace EasyFacturation.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    CompanyNumber = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    TaxeNumber = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    StreetNumber = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    StreetName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    AdressLine1 = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    AdressLine2 = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ZipCode = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    Phone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    CompanyName = table.Column<string>(type: "TEXT", nullable: false),
+                    CompanyNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    TaxeNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    StreetNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    StreetName = table.Column<string>(type: "TEXT", nullable: false),
+                    AdressLine1 = table.Column<string>(type: "TEXT", nullable: false),
+                    AdressLine2 = table.Column<string>(type: "TEXT", nullable: false),
+                    City = table.Column<string>(type: "TEXT", nullable: false),
+                    ZipCode = table.Column<string>(type: "TEXT", nullable: false),
+                    Phone = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,17 +40,18 @@ namespace EasyFacturation.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    StreetNumber = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    StreetName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    AdressLine1 = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    AdressLine2 = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ZipCode = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    Phone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                    Title = table.Column<int>(type: "INTEGER", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    CompanyName = table.Column<string>(type: "TEXT", nullable: false),
+                    StreetNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    StreetName = table.Column<string>(type: "TEXT", nullable: false),
+                    AdressLine1 = table.Column<string>(type: "TEXT", nullable: false),
+                    AdressLine2 = table.Column<string>(type: "TEXT", nullable: false),
+                    City = table.Column<string>(type: "TEXT", nullable: false),
+                    ZipCode = table.Column<string>(type: "TEXT", nullable: false),
+                    Phone = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,7 +64,7 @@ namespace EasyFacturation.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Language = table.Column<string>(type: "TEXT", nullable: false),
-                    DefaultTaxRate = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    DefaultTaxRate = table.Column<decimal>(type: "TEXT", nullable: false),
                     Currency = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -79,9 +80,9 @@ namespace EasyFacturation.Migrations
                     QuoteNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TaxeRate = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    Subtotal = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Total = table.Column<decimal>(type: "TEXT", nullable: false),
+                    TaxeRate = table.Column<decimal>(type: "TEXT", nullable: false),
                     ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
                     AppOwnerId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
@@ -109,9 +110,9 @@ namespace EasyFacturation.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     InvoiceNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TaxeRate = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    Subtotal = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Total = table.Column<decimal>(type: "TEXT", nullable: false),
+                    TaxeRate = table.Column<decimal>(type: "TEXT", nullable: false),
                     ClientID = table.Column<Guid>(type: "TEXT", nullable: false),
                     AppOwnerId = table.Column<Guid>(type: "TEXT", nullable: false),
                     QuoteId = table.Column<Guid>(type: "TEXT", nullable: true)
@@ -144,7 +145,7 @@ namespace EasyFacturation.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "TEXT", nullable: true),
                     Quantity = table.Column<decimal>(type: "TEXT", nullable: true),
                     QuoteId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
@@ -183,7 +184,7 @@ namespace EasyFacturation.Migrations
                 {
                     ID = table.Column<Guid>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "TEXT", nullable: true),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: true),
                     InvoiceId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },

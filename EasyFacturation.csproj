@@ -74,7 +74,6 @@
 
   <ItemGroup>
     <Folder Include="Presentation\ViewModels\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

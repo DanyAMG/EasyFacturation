@@ -61,11 +61,47 @@ namespace EasyFacturation.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to create the client, please try again..
+        /// </summary>
+        internal static string ClientCreateErrorMessage {
+            get {
+                return ResourceManager.GetString("ClientCreateErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A client must have either a first and last name, or a company name..
         /// </summary>
         internal static string ClientNameOrCompany {
             get {
                 return ResourceManager.GetString("ClientNameOrCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to update the client, please try again..
+        /// </summary>
+        internal static string ClientUpdateErrorMessage {
+            get {
+                return ResourceManager.GetString("ClientUpdateErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve the client..
+        /// </summary>
+        internal static string GettingClientErrorMessage {
+            get {
+                return ResourceManager.GetString("GettingClientErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve clients..
+        /// </summary>
+        internal static string GettingClientListErrorMessage {
+            get {
+                return ResourceManager.GetString("GettingClientListErrorMessage", resourceCulture);
             }
         }
         

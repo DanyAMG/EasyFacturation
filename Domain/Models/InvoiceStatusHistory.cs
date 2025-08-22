@@ -11,8 +11,6 @@ namespace EasyFacturation.Domain.Models
     {
         [Key]
         public Guid Id { get; set; }
-
-        
         public enum InvoiceStatus
         {
             Waiting = 0,
@@ -21,7 +19,6 @@ namespace EasyFacturation.Domain.Models
         }
 
         //Foreign Key
-        [Required]
         public Guid InvoiceId { get; set; }
         public Invoice Invoice { get; set; }
     }

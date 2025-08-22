@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClientCreateErrorMessage" xml:space="preserve">
+    <value>Unable to create the client, please try again.</value>
+  </data>
   <data name="ClientNameOrCompany" xml:space="preserve">
     <value>A client must have either a first and last name, or a company name.</value>
+  </data>
+  <data name="ClientUpdateErrorMessage" xml:space="preserve">
+    <value>Unable to update the client, please try again.</value>
+  </data>
+  <data name="GettingClientErrorMessage" xml:space="preserve">
+    <value>Failed to retrieve the client.</value>
+  </data>
+  <data name="GettingClientListErrorMessage" xml:space="preserve">
+    <value>Failed to retrieve clients.</value>
   </data>
   <data name="InvalidEmailAdress" xml:space="preserve">
     <value>The email is invalid.</value>
