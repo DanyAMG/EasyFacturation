@@ -12,7 +12,7 @@ namespace EasyFacturation.Infrastructure.Persistence
 {
     public class ClientRepository :IClientRepository
     {
-        private readonly AppDbContext _context;
+        public readonly AppDbContext _context;
 
         // Constructor to initialize the SQL Local DB
         public ClientRepository(AppDbContext context)
@@ -65,7 +65,7 @@ namespace EasyFacturation.Infrastructure.Persistence
             return client;
         }
 
-        public async Task<Client> DeleteClientAsync(Guid id)
+        public async Task ArchiveClientAsync(Guid id)
         {
             var existingClient = await _context.Clients.FindAsync(id);
 
@@ -73,9 +73,11 @@ namespace EasyFacturation.Infrastructure.Persistence
             {
                 throw new ClientNotFoundException($"Client with ID {id} not found.");
             }
-            _context.Clients.Remove(existingClient);
+
+            existingClient.IsArchived = true;
+            existingClient.ArchivedAt = DateTime.Now;
+
             await _context.SaveChangesAsync();
-            return existingClient;
         }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyFacturation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250821235435_InitialCreate")]
+    [Migration("20250825131350_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -156,11 +156,15 @@ namespace EasyFacturation.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("InvoiceNumber")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("InvoiceNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid?>("QuoteId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("SequenceNumber")
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Subtotal")
                         .HasColumnType("TEXT");
@@ -243,7 +247,11 @@ namespace EasyFacturation.Migrations
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("QuoteNumber")
+                    b.Property<string>("QuoteNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SequenceNumber")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Subtotal")
@@ -319,9 +327,31 @@ namespace EasyFacturation.Migrations
                     b.Property<decimal>("DefaultTaxRate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("InvoiceNumberFormat")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InvoiceNumberPrefix")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InvoiceSequence")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Language")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("QuoteNumberFormat")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QuoteNumberPrefix")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("QuoteSequence")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

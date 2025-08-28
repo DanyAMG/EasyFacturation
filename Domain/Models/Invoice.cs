@@ -13,7 +13,8 @@ namespace EasyFacturation.Domain.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public int InvoiceNumber { get; set; }
+        public int SequenceNumber { get; set; }
+        public string InvoiceNumber { get; set; }
         public DateTime CreationDate { get; set; }
         public decimal Subtotal { get; set; }
         public decimal Total { get; set; }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EasyFacturation.Domain.Enums;
 
 namespace EasyFacturation.Domain.Models
 {
@@ -12,14 +13,9 @@ namespace EasyFacturation.Domain.Models
         [Key]
         public Guid Id { get; set; }
 
-        public enum QuoteStatus
-        {
-            Waiting = 0,
-            Late = 1,
-            Reminded = 2,
-            Accepted = 3,
-            Refused = 4
-        }
+        public QuoteStatus Status { get; set; }
+
+        public DateTime ChangedAt { get; set; } = DateTime.UtcNow;
 
         //Foreign Key
         public Guid QuoteId { get; set; }

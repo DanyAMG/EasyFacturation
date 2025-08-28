@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasyFacturation.AppServices.DTOs
 {
-    public class QuoteLineCreateDTO
+    public class QuoteLineUpdateDTO
     {
         [Required]
         public string Description { get; set; }

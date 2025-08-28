@@ -15,7 +15,7 @@ namespace EasyFacturation.Domain.Interfaces
         Task<IEnumerable<Client>> GetAllClientsAsync();
         Task<Client> CreateClientAsync(Client client);
         Task<Client> UpdateClientAsync(Client client);
-        Task<Client> DeleteClientAsync(Guid id);
+        Task ArchiveClientAsync(Guid id);
     }
 
 }

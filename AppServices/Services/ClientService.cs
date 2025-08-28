@@ -102,7 +102,15 @@ namespace EasyFacturation.AppServices.Services
                     Email = clientDTO.Email,
                 };
 
+                var validationContext = new ValidationContext(client);
+                Validator.ValidateObject(client, validationContext, validateAllProperties: true);
+
                 var createdClient = await _clientRepository.CreateClientAsync(client);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError("Full name or company name are empty");
+                throw new ClientServiceException(Ressources.ValidationMessage.ClientNameOrCompany, ex);
             }
             catch (DbUpdateException dbEx)
             {
@@ -111,7 +119,7 @@ namespace EasyFacturation.AppServices.Services
             }
         }
 
-        public async Task UpdateClientAsync(ClientUpdateDTO clientDTO)
+        public async Task<Client> UpdateClientAsync(ClientUpdateDTO clientDTO)
         {
             try
             {
@@ -135,7 +143,8 @@ namespace EasyFacturation.AppServices.Services
                 if (clientDTO.Phone != null) client.Phone = clientDTO.Phone;
                 if (clientDTO.Email != null) client.Email = clientDTO.Email;
 
-                var updatedClient = await _clientRepository.UpdateClientAsync(client);
+                 var updatedClient = await _clientRepository.UpdateClientAsync(client);
+                return updatedClient;
             }
             catch (DbUpdateException dbEx)
             {
@@ -144,5 +153,26 @@ namespace EasyFacturation.AppServices.Services
             }
         }
 
+        public async Task<bool> DeleteClientAsync(Guid clientId)
+        {
+            try
+            {
+                var client = await _clientRepository.GetClientByIdAsync(clientId);
+
+                if (client == null)
+                {
+                    throw new ClientServiceException(Ressources.ValidationMessage.GettingClientErrorMessage);
+                    return false;
+                }
+
+                await _clientRepository.ArchiveClientAsync(clientId);
+                return true;
+            }
+            catch(DbUpdateException dbEx)
+            {
+                _logger.LogError(dbEx, "An error occured while deleting client");
+                throw new ClientServiceException(Ressources.ValidationMessage.ClientDeleteErrorMessage, dbEx);
+            }
+        }
     }
 }

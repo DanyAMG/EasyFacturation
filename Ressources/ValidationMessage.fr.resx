@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllQuoteLineMustHaveDescriptionErrorMessage" xml:space="preserve">
+    <value>Toutes les lignes doivent avoir une description.</value>
+  </data>
+  <data name="ChangingQuoteStatusErrorMessage" xml:space="preserve">
+    <value>Impossible de modifier le statut du devis.</value>
+  </data>
   <data name="ClientCreateErrorMessage" xml:space="preserve">
     <value>Impossible de créer le client, veuillez réessayer.</value>
+  </data>
+  <data name="ClientDeleteErrorMessage" xml:space="preserve">
+    <value>Impossible de supprimer le client, veuillez réessayer.</value>
   </data>
   <data name="ClientNameOrCompany" xml:space="preserve">
     <value>Un client doit avoir soit un nom et prénom, soit une raison sociale.</value>
@@ -126,16 +135,43 @@
   <data name="ClientUpdateErrorMessage" xml:space="preserve">
     <value>Impossible de mettre à jour le client, veuillez réessayer.</value>
   </data>
+  <data name="CreatingQuoteErrorMessage" xml:space="preserve">
+    <value>Impossible de créer le devis, veuillez réessayer.</value>
+  </data>
   <data name="GettingClientErrorMessage" xml:space="preserve">
     <value>Impossible de récupérer le client.</value>
   </data>
   <data name="GettingClientListErrorMessage" xml:space="preserve">
     <value>Impossible de récupérer la liste de clients.</value>
   </data>
+  <data name="GettingQuoteErrorMessage" xml:space="preserve">
+    <value>Impossible de récupérer le devis.</value>
+  </data>
+  <data name="GettingQuoteListErrorMessage" xml:space="preserve">
+    <value>Impossible de récupérer la liste des devis.</value>
+  </data>
   <data name="InvalidEmailAdress" xml:space="preserve">
     <value>L'adresse mail est invalide.</value>
   </data>
   <data name="InvalidPhoneNumber" xml:space="preserve">
     <value>Le numéro de téléphone est invalide.</value>
+  </data>
+  <data name="QuoteAlreadyArchivedErrorMessage" xml:space="preserve">
+    <value>Impossible de changer le statut d'un devis archivé.</value>
+  </data>
+  <data name="QuoteLinesMustBeFulledOrEmpty" xml:space="preserve">
+    <value>Toutes les lignes doivent avoir un prix et une quantité OU aucune ligne ne doit en avoir.</value>
+  </data>
+  <data name="QuoteMusteHaveLinesToBeCreated" xml:space="preserve">
+    <value>Impossible de créer un devis sans ligne.</value>
+  </data>
+  <data name="QuoteNotInDraftStatusErrorMessage" xml:space="preserve">
+    <value>Impossible de modifier un devis déjà envoyé.</value>
+  </data>
+  <data name="QuoteNotSentStatusErrorMessage" xml:space="preserve">
+    <value>Impossible de corriger un devis qui n'a pas été envoyé.</value>
+  </data>
+  <data name="QuoteUpdateErrorMessage" xml:space="preserve">
+    <value>Impossible de mettre à jour le devis, veuillez réessayer.</value>
   </data>
 </root>

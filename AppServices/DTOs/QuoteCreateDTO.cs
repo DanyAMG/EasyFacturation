@@ -5,14 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EasyFacturation.Domain.Models;
 
 namespace EasyFacturation.AppServices.DTOs
 {
-    internal class QuoteCreateDTO
+    public class QuoteCreateDTO
     {
-        [Required]
-        public int QuoteNumber { get; set; }
-
         [Required]
         public DateTime CreationDate { get; set; }
 
@@ -31,5 +29,10 @@ namespace EasyFacturation.AppServices.DTOs
         [Range(0, 100)]
         [Column(TypeName = "decimal(5,2)")]
         public decimal TaxeRate { get; set; }
+
+        [Required]
+        public Guid ClientId { get; set; }
+
+        public List<QuoteLine> QuoteLines { get; set; }
     }
 }

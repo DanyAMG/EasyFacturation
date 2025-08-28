@@ -61,11 +61,38 @@ namespace EasyFacturation.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All lines must have a description..
+        /// </summary>
+        internal static string AllQuoteLineMustHaveDescriptionErrorMessage {
+            get {
+                return ResourceManager.GetString("AllQuoteLineMustHaveDescriptionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to change the quote status.
+        /// </summary>
+        internal static string ChangingQuoteStatusErrorMessage {
+            get {
+                return ResourceManager.GetString("ChangingQuoteStatusErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to create the client, please try again..
         /// </summary>
         internal static string ClientCreateErrorMessage {
             get {
                 return ResourceManager.GetString("ClientCreateErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to delete the client, please try again..
+        /// </summary>
+        internal static string ClientDeleteErrorMessage {
+            get {
+                return ResourceManager.GetString("ClientDeleteErrorMessage", resourceCulture);
             }
         }
         
@@ -88,6 +115,15 @@ namespace EasyFacturation.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to create the quote, please try again..
+        /// </summary>
+        internal static string CreatingQuoteErrorMessage {
+            get {
+                return ResourceManager.GetString("CreatingQuoteErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to retrieve the client..
         /// </summary>
         internal static string GettingClientErrorMessage {
@@ -106,6 +142,24 @@ namespace EasyFacturation.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve the quote..
+        /// </summary>
+        internal static string GettingQuoteErrorMessage {
+            get {
+                return ResourceManager.GetString("GettingQuoteErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve quotes..
+        /// </summary>
+        internal static string GettingQuoteListErrorMessage {
+            get {
+                return ResourceManager.GetString("GettingQuoteListErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The email is invalid..
         /// </summary>
         internal static string InvalidEmailAdress {
@@ -120,6 +174,60 @@ namespace EasyFacturation.Ressources {
         internal static string InvalidPhoneNumber {
             get {
                 return ResourceManager.GetString("InvalidPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot change status of an archived quote..
+        /// </summary>
+        internal static string QuoteAlreadyArchivedErrorMessage {
+            get {
+                return ResourceManager.GetString("QuoteAlreadyArchivedErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All lines must have a quantity and unit price OR all lines must be empty..
+        /// </summary>
+        internal static string QuoteLinesMustBeFulledOrEmpty {
+            get {
+                return ResourceManager.GetString("QuoteLinesMustBeFulledOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to create a quote without any item lines..
+        /// </summary>
+        internal static string QuoteMusteHaveLinesToBeCreated {
+            get {
+                return ResourceManager.GetString("QuoteMusteHaveLinesToBeCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to update a quote already sent..
+        /// </summary>
+        internal static string QuoteNotInDraftStatusErrorMessage {
+            get {
+                return ResourceManager.GetString("QuoteNotInDraftStatusErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to correct a quote not sent..
+        /// </summary>
+        internal static string QuoteNotSentStatusErrorMessage {
+            get {
+                return ResourceManager.GetString("QuoteNotSentStatusErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to update the quote, please try again..
+        /// </summary>
+        internal static string QuoteUpdateErrorMessage {
+            get {
+                return ResourceManager.GetString("QuoteUpdateErrorMessage", resourceCulture);
             }
         }
     }

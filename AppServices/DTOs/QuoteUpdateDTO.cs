@@ -1,21 +1,25 @@
-﻿using EasyFacturation.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EasyFacturation.Domain.Models;
 
 namespace EasyFacturation.AppServices.DTOs
 {
-    public class InvoiceCreateDTO
+    public class QuoteUpdateDTO
     {
+
         [Required]
-        public int InvoiceNumber { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public DateTime CreationDate { get; set; }
+
+        [Required]
+        public DateTime ExpirationDate { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
@@ -29,5 +33,10 @@ namespace EasyFacturation.AppServices.DTOs
         [Range(0, 100)]
         [Column(TypeName = "decimal(5,2)")]
         public decimal TaxeRate { get; set; }
+
+        [Required]
+        public Guid ClientId { get; set; }
+
+        public List<QuoteLine> QuoteLines { get; set; }
     }
 }

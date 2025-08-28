@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasyFacturation.AppServices.DTOs
 {
-    internal class InvoiceLineCreateDTO
+    public class InvoiceLineCreateDTO
     {
         [Required]
         public string Description { get; set; }

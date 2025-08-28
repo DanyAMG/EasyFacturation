@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasyFacturation.AppServices.DTOs
 {
-    internal class AppOwnerCreateDTO
+    public class AppOwnerCreateDTO
     {
         [MaxLength(100)]
         public string LastName { get; set; }

@@ -19,6 +19,8 @@ namespace EasyFacturation.Domain.Models
         public string ZipCode { get; set; }
         public string Phone {  get; set; }
         public string Email { get; set; }
+        public bool IsArchived { get; set; } = false;
+        public DateTime ArchivedAt { get; set; }
 
         /// <summary>
         /// Validates that either both first and last names are provided, or the company name is provided.

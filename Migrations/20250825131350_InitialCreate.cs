@@ -65,7 +65,13 @@ namespace EasyFacturation.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Language = table.Column<string>(type: "TEXT", nullable: false),
                     DefaultTaxRate = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Currency = table.Column<string>(type: "TEXT", nullable: false)
+                    Currency = table.Column<string>(type: "TEXT", nullable: false),
+                    QuoteNumberPrefix = table.Column<string>(type: "TEXT", nullable: false),
+                    QuoteNumberFormat = table.Column<string>(type: "TEXT", nullable: false),
+                    QuoteSequence = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceNumberPrefix = table.Column<string>(type: "TEXT", nullable: false),
+                    InvoiceNumberFormat = table.Column<string>(type: "TEXT", nullable: false),
+                    InvoiceSequence = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,7 +83,8 @@ namespace EasyFacturation.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    QuoteNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    SequenceNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    QuoteNumber = table.Column<string>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Subtotal = table.Column<decimal>(type: "TEXT", nullable: false),
@@ -108,7 +115,8 @@ namespace EasyFacturation.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    InvoiceNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    SequenceNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceNumber = table.Column<string>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Subtotal = table.Column<decimal>(type: "TEXT", nullable: false),
                     Total = table.Column<decimal>(type: "TEXT", nullable: false),

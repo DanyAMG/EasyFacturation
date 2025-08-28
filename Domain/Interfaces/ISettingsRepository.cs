@@ -9,9 +9,7 @@ namespace EasyFacturation.Domain.Interfaces
 {
     public interface ISettingsRepository
     {
-        Task<Settings> GetSettingsByIdAsync(Guid id);
-        Task<Settings> CreateSettingsByIdAsync(Settings settings);
-        Task<Settings> UpdateSettingsByIdAsync(Settings settings);
-        Task<Settings> DeleteSettingsByIdAsync(Guid id);
+        Task<Settings> GetSettingsAsync();
+        Task<Settings> UpdateSettingsAsync(Settings settings);
     }
 }

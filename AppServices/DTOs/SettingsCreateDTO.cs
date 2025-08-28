@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasyFacturation.AppServices.DTOs
 {
-    internal class SettingsCreateDTO
+    public class SettingsCreateDTO
     {
         [Required]
         public string Language { get; set; }
