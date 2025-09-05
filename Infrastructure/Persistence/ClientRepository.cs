@@ -48,8 +48,11 @@ namespace EasyFacturation.Infrastructure.Persistence
 
         public async Task<Client> CreateClientAsync(Client client)
         {
+            System.Diagnostics.Debug.WriteLine($"DB Path: {_context.Database.GetDbConnection().DataSource}");
+            System.Diagnostics.Debug.WriteLine($"DB: {_context.Database.GetDbConnection().ConnectionString}");
             _context.Clients.Add(client);
-            await _context.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync();
+            System.Diagnostics.Debug.WriteLine($"Rows saved: {result}");
             return client;
         }
 

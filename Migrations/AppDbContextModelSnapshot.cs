@@ -87,11 +87,12 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AdressLine1")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AdressLine2")
-                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ArchivedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
@@ -99,7 +100,6 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -107,11 +107,12 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
@@ -123,7 +124,6 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StreetNumber")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Title")
@@ -167,6 +167,10 @@ namespace EasyFacturation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TaxeRate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Total")
@@ -244,17 +248,24 @@ namespace EasyFacturation.Migrations
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("OriginalQuoteId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("QuoteNumber")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("SequenceNumber")
+                    b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Subtotal")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TaxeRate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Total")
@@ -265,6 +276,8 @@ namespace EasyFacturation.Migrations
                     b.HasIndex("AppOwnerId");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("OriginalQuoteId");
 
                     b.ToTable("Quotes");
                 });
@@ -301,8 +314,14 @@ namespace EasyFacturation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("ChangedAt")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("QuoteId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -416,15 +435,22 @@ namespace EasyFacturation.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EasyFacturation.Domain.Models.Quote", "OriginalQuote")
+                        .WithMany("Corrections")
+                        .HasForeignKey("OriginalQuoteId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("AppOwner");
 
                     b.Navigation("Client");
+
+                    b.Navigation("OriginalQuote");
                 });
 
             modelBuilder.Entity("EasyFacturation.Domain.Models.QuoteLine", b =>
                 {
                     b.HasOne("EasyFacturation.Domain.Models.Quote", "Quote")
-                        .WithMany()
+                        .WithMany("QuoteLines")
                         .HasForeignKey("QuoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -435,7 +461,7 @@ namespace EasyFacturation.Migrations
             modelBuilder.Entity("EasyFacturation.Domain.Models.QuoteStatusHistory", b =>
                 {
                     b.HasOne("EasyFacturation.Domain.Models.Quote", "Quote")
-                        .WithMany()
+                        .WithMany("StatusHistory")
                         .HasForeignKey("QuoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -445,8 +471,14 @@ namespace EasyFacturation.Migrations
 
             modelBuilder.Entity("EasyFacturation.Domain.Models.Quote", b =>
                 {
+                    b.Navigation("Corrections");
+
                     b.Navigation("Invoice")
                         .IsRequired();
+
+                    b.Navigation("QuoteLines");
+
+                    b.Navigation("StatusHistory");
                 });
 #pragma warning restore 612, 618
         }

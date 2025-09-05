@@ -12,6 +12,9 @@ namespace EasyFacturation.AppServices.DTOs
     public class InvoiceCreateDTO
     {
         [Required]
+        public string Title { get; set; }
+
+        [Required]
         public int InvoiceNumber { get; set; }
 
         [Required]

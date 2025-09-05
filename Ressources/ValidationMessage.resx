@@ -150,6 +150,9 @@
   <data name="GettingQuoteListErrorMessage" xml:space="preserve">
     <value>Failed to retrieve quotes.</value>
   </data>
+  <data name="GettingQuoteStatusHistoryErrorMessage" xml:space="preserve">
+    <value>Failed to retrieve the quote status history.</value>
+  </data>
   <data name="InvalidEmailAdress" xml:space="preserve">
     <value>The email is invalid.</value>
   </data>

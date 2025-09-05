@@ -160,6 +160,15 @@ namespace EasyFacturation.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to retrieve the quote status history..
+        /// </summary>
+        internal static string GettingQuoteStatusHistoryErrorMessage {
+            get {
+                return ResourceManager.GetString("GettingQuoteStatusHistoryErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The email is invalid..
         /// </summary>
         internal static string InvalidEmailAdress {

@@ -11,9 +11,8 @@ namespace EasyFacturation.AppServices.DTOs
 {
     public class QuoteUpdateDTO
     {
-
         [Required]
-        public Guid Id { get; set; }
+        public string Title { get; set; }
 
         [Required]
         public DateTime CreationDate { get; set; }
@@ -37,6 +36,6 @@ namespace EasyFacturation.AppServices.DTOs
         [Required]
         public Guid ClientId { get; set; }
 
-        public List<QuoteLine> QuoteLines { get; set; }
+        public List<QuoteLineCreateDTO> QuoteLines { get; set; }
     }
 }

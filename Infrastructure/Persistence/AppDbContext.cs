@@ -32,6 +32,12 @@ namespace EasyFacturation.Infrastructure.Persistence
                 .HasForeignKey<Invoice>(i => i.QuoteId)
                 .IsRequired(false);
 
+            modelBuilder.Entity<Quote>()
+                .HasMany(q => q.Corrections)
+                .WithOne(q => q.OriginalQuote)
+                .HasForeignKey(q => q.OriginalQuoteId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
         }
     }

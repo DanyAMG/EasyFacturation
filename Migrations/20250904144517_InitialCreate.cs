@@ -41,17 +41,19 @@ namespace EasyFacturation.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Title = table.Column<int>(type: "INTEGER", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    CompanyName = table.Column<string>(type: "TEXT", nullable: false),
-                    StreetNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
+                    CompanyName = table.Column<string>(type: "TEXT", nullable: true),
+                    StreetNumber = table.Column<string>(type: "TEXT", nullable: true),
                     StreetName = table.Column<string>(type: "TEXT", nullable: false),
-                    AdressLine1 = table.Column<string>(type: "TEXT", nullable: false),
-                    AdressLine2 = table.Column<string>(type: "TEXT", nullable: false),
+                    AdressLine1 = table.Column<string>(type: "TEXT", nullable: true),
+                    AdressLine2 = table.Column<string>(type: "TEXT", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: false),
                     ZipCode = table.Column<string>(type: "TEXT", nullable: false),
                     Phone = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false)
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    IsArchived = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ArchivedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,13 +85,15 @@ namespace EasyFacturation.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    SequenceNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     QuoteNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Subtotal = table.Column<decimal>(type: "TEXT", nullable: false),
                     Total = table.Column<decimal>(type: "TEXT", nullable: false),
                     TaxeRate = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    OriginalQuoteId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
                     AppOwnerId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
@@ -108,6 +112,12 @@ namespace EasyFacturation.Migrations
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Quotes_Quotes_OriginalQuoteId",
+                        column: x => x.OriginalQuoteId,
+                        principalTable: "Quotes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,6 +127,7 @@ namespace EasyFacturation.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     SequenceNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     InvoiceNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Subtotal = table.Column<decimal>(type: "TEXT", nullable: false),
                     Total = table.Column<decimal>(type: "TEXT", nullable: false),
@@ -173,6 +184,8 @@ namespace EasyFacturation.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    ChangedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     QuoteId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -265,6 +278,11 @@ namespace EasyFacturation.Migrations
                 name: "IX_Quotes_ClientId",
                 table: "Quotes",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Quotes_OriginalQuoteId",
+                table: "Quotes",
+                column: "OriginalQuoteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_QuoteStatusHistories_QuoteId",

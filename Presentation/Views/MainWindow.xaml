@@ -1,12 +1,39 @@
-﻿<Window x:Class="EasyFacturation.MainWindow"
+﻿<Window x:Class="EasyFacturation.Presentation.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EasyFacturation"
+        xmlns:views="clr-namespace:EasyFacturation.Presentation.Views"
+        xmlns:local="clr-namespace:EasyFacturation.Presentation.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="EasyFacturation"
+        WindowState ="Maximized" d:DesignHeight="464.223" d:DesignWidth="873.424">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Home" Command="{Binding NavigateHomeCommand}"/>
+            <MenuItem Header="Clients">
+                <MenuItem Header="Client List" Command="{Binding NavigateClientListCommand}"/>
+                <MenuItem Header="Add Client" Command="{Binding NavigateAddClientCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Quotes">
+                <MenuItem Header="Show Quotes" Command="{Binding NavigateQuoteListCommand}"/>
+                <MenuItem Header="Add Quote" Command="{Binding NavigateAddQuoteCommand}"/>
+            </MenuItem>
 
-    </Grid>
+            <MenuItem Header="Invoices">
+                <MenuItem Header="Show Invoices" Command="{Binding NavigateInvoiceListCommand}"/>
+                <MenuItem Header="Add Invoice" Command="{Binding NavigateAddInvoiceCommand}"/>
+            </MenuItem>
+
+            <MenuItem Header="Archive" Command="{Binding NavigateArchiveListCommand}"/>
+            
+            <MenuItem Header="Settings">
+                <MenuItem Header="Quote Model" Command="{Binding NavigateQuoteModelCommand}"/>
+                <MenuItem Header="Invoice Model" Command="{Binding NavigateInvoiceModelCommand}"/>
+                <MenuItem Header="User information" Command="{Binding NavigateUserSettingsCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <ContentControl Content="{Binding CurrentView}"/>
+    </DockPanel>
 </Window>

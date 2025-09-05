@@ -1,16 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System.IO;
 
 namespace EasyFacturation.Infrastructure.Persistence
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        private const string ConnectionString = "Data Source=easyfacturation.db";
-
         public AppDbContext CreateDbContext(string[] args)
         {
+            var dbPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "EasyFacturation",
+            "easyfacturation.db"
+        );
+
+            var folder = Path.GetDirectoryName(dbPath);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlite(ConnectionString);
+            optionsBuilder.UseSqlite($"Data Source={dbPath}");
 
             return new AppDbContext(optionsBuilder.Options);
         }
