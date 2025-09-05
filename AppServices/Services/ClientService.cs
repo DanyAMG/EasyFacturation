@@ -88,6 +88,7 @@ namespace EasyFacturation.AppServices.Services
             {
                 var client = new Client
                 {
+                    Id = Guid.NewGuid(),
                     Title = clientDTO.Title,
                     LastName = clientDTO.LastName,
                     FirstName = clientDTO.FirstName,

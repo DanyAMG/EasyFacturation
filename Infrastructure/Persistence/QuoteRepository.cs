@@ -30,6 +30,7 @@ namespace EasyFacturation.Infrastructure.Persistence
 
         public async Task<IEnumerable<Quote>> GetQuotesAsync(
             string? quoteNumber = null,
+            string? title = null,
             Guid? clientId = null,
             string? clientLastName = null,
             string? clientCompanyName = null,
@@ -45,6 +46,11 @@ namespace EasyFacturation.Infrastructure.Persistence
             if (!string.IsNullOrWhiteSpace(quoteNumber))
             {
                 query = query.Where(q => q.QuoteNumber == quoteNumber);
+            }
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                query = query.Where(q => q.Title == title);
             }
 
             if (clientId.HasValue)

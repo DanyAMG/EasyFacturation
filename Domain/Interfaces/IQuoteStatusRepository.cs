@@ -9,10 +9,8 @@ namespace EasyFacturation.Domain.Interfaces
 {
     public interface IQuoteStatusRepository
     {
-        Task<QuoteStatusHistory> GetQuoteStatusByIdAsync(Guid id);
-        Task<IEnumerable<QuoteStatusHistory>> GetAllQuoteStatusAsync();
+        Task<QuoteStatusHistory> GetQuoteStatusById(Guid id);
+        Task<IEnumerable<QuoteStatusHistory>> GetQuoteStatusByQuoteIdAsync(Guid quoteId);
         Task<QuoteStatusHistory> CreateQuoteStatusAsync(QuoteStatusHistory quoteStatus);
-        Task<QuoteStatusHistory> UpdateQuoteStatusAsync(QuoteStatusHistory quoteStatus);
-        Task<QuoteStatusHistory> DeleteQuoteStatusAsync(Guid id);
     }
 }

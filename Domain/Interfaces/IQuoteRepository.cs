@@ -13,6 +13,7 @@ namespace EasyFacturation.Domain.Interfaces
         Task<Quote> GetQuoteByIdAsync(Guid id);
         Task<IEnumerable<Quote>> GetQuotesAsync(
             string? quoteNumber = null,
+            string? title = null,
             Guid? clientId = null,
             string? clientLastName = null,
             string? clientCompanyName = null,

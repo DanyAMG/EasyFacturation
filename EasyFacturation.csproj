@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="FluentAssertions" Version="8.6.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
@@ -23,6 +24,39 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Presentation\Views\AddInvoiceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\AddQuoteView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\EditInvoiceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\EditQuoteView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\ArchiveListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\InvoiceModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\QuoteModelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\UserSettingsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\InvoiceListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\QuoteListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Views\EditClientView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Ressources\InvoicePage.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -71,10 +105,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationMessage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Presentation\ViewModels\" />
   </ItemGroup>
 
 </Project>

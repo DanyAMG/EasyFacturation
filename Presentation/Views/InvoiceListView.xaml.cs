@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,17 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EasyFacturation.Presentation.Views;
-using EasyFacturation.Presentation.ViewModels;
 
 namespace EasyFacturation.Presentation.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SearchClientPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class InvoiceListView : UserControl
     {
-        public MainWindow()
+        public InvoiceListView()
         {
             InitializeComponent();
         }

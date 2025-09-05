@@ -15,6 +15,7 @@ namespace EasyFacturation.Domain.Models
         [Key]
         public Guid Id { get; set; }
         public string QuoteNumber { get; set; }
+        public string Title { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public decimal Subtotal { get; set; }
@@ -27,8 +28,7 @@ namespace EasyFacturation.Domain.Models
         public Quote OriginalQuote { get; set; }
 
         //If the quote is an original and is corrected by a correction quote
-        public Guid? CorrectionQuoteId { get; set; } //null if the quote is a correction
-        public Quote CorrectionQuote { get; set; }
+        public ICollection<Quote> Corrections { get; set; } = new List<Quote>();
 
         //Foreign Key
         public Guid ClientId { get; set; }

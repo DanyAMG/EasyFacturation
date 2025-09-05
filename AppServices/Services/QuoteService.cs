@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SQLitePCL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,20 +22,23 @@ namespace EasyFacturation.AppServices.Services
         private readonly IQuoteRepository _quoteRepository;
         private readonly IClientRepository _clientRepository;
         private readonly SettingsService _settingsService;
+        private readonly QuoteStatusService _statusService;
         private readonly AppDbContext _context;
         private readonly ILogger _logger;
 
-        public QuoteService(IQuoteRepository quoteRepository, IClientRepository clientRepository, ILogger logger, SettingsService settingsService, AppDbContext context)
+        public QuoteService(IQuoteRepository quoteRepository, IClientRepository clientRepository, ILogger logger, SettingsService settingsService, AppDbContext context, QuoteStatusService statusService)
         {
             _quoteRepository = quoteRepository;
             _clientRepository = clientRepository;
             _settingsService = settingsService;
             _logger = logger;
             _context = context;
+            _statusService = statusService;
         }
 
         public async Task<List<Quote>> GetQuotesAsync(
             string? quoteNumber = null,
+            string? title = null,
             Guid? clientId = null,
             string? clientLastName = null,
             string? clientCompanyName = null,
@@ -46,6 +50,7 @@ namespace EasyFacturation.AppServices.Services
             {
                 var quotes = await _quoteRepository.GetQuotesAsync(
                     quoteNumber,
+                    title,
                     clientId,
                     clientLastName,
                     clientCompanyName,
@@ -76,7 +81,7 @@ namespace EasyFacturation.AppServices.Services
             }
         }
 
-        public async Task<Quote> CreateQuoteAsync(QuoteUpdateDTO quoteDTO)
+        public async Task<Quote> CreateQuoteAsync(QuoteCreateDTO quoteDTO)
         {
             try
             {
@@ -97,6 +102,7 @@ namespace EasyFacturation.AppServices.Services
                 var quote = new Quote
                 {
                     Id = Guid.NewGuid(),
+                    Title = quoteDTO.Title,
                     QuoteNumber = quoteNumber,
                     CreationDate = quoteDTO.CreationDate,
                     ExpirationDate = quoteDTO.ExpirationDate,
@@ -104,7 +110,6 @@ namespace EasyFacturation.AppServices.Services
                     Total = total,
                     TaxeRate = quoteDTO.TaxeRate,
                     ClientId = quoteDTO.ClientId,
-                    Client = client,
                     QuoteLines = quoteDTO.QuoteLines.Select(l => new QuoteLine
                     {
                         Id = Guid.NewGuid(),
@@ -116,6 +121,8 @@ namespace EasyFacturation.AppServices.Services
 
                 await _quoteRepository.CreateQuoteAsync(quote);
 
+                await _statusService.ChangeStatusAsync(quote.Id, QuoteStatus.Draft);
+
                 return quote;
 
             }
@@ -126,7 +133,7 @@ namespace EasyFacturation.AppServices.Services
             }
         }
 
-        private (decimal Subtotal, decimal Total) ValidateAndCalculateAmounts(List<QuoteLine> quoteLines, decimal? providedSubtotal, decimal taxRate)
+        private (decimal Subtotal, decimal Total) ValidateAndCalculateAmounts(List<QuoteLineCreateDTO> quoteLines, decimal? providedSubtotal, decimal taxRate)
         {
             decimal subtotal;
             if (quoteLines != null && quoteLines.Any())
@@ -161,11 +168,11 @@ namespace EasyFacturation.AppServices.Services
         }
 
 
-        public async Task<Quote> UpdateDraftedQuoteAsync(QuoteUpdateDTO quoteDTO)
+        public async Task<Quote> UpdateDraftedQuoteAsync(QuoteUpdateDTO quoteDTO, Guid id)
         {
             try
             {
-                var existingQuote = await _quoteRepository.GetQuoteByIdAsync(quoteDTO.Id);
+                var existingQuote = await _quoteRepository.GetQuoteByIdAsync(id);
                 if (existingQuote == null)
                 {
                     throw new QuoteNotFoundException(Ressources.ValidationMessage.GettingQuoteErrorMessage);
@@ -174,29 +181,29 @@ namespace EasyFacturation.AppServices.Services
                 if (existingQuote.Status == QuoteStatus.Draft)
                 {
                     existingQuote.ClientId = quoteDTO.ClientId;
+                    existingQuote.Title = quoteDTO.Title;
                     existingQuote.ExpirationDate = quoteDTO.ExpirationDate;
-                    existingQuote.Subtotal = quoteDTO.Subtotal;
-                    existingQuote.Total = quoteDTO.Total;
                     existingQuote.TaxeRate = quoteDTO.TaxeRate;
 
-                    var updatedLines = quoteDTO.QuoteLines ?? new List<QuoteLine>();
+                    var (subtotal, total) = ValidateAndCalculateAmounts(quoteDTO.QuoteLines, quoteDTO.Subtotal, quoteDTO.TaxeRate);
+                    existingQuote.Subtotal = quoteDTO.Subtotal;
+                    existingQuote.Total = quoteDTO.Total;
 
-                    foreach( var updatedLine in updatedLines)
+                    existingQuote.QuoteLines.Clear();
+                    foreach ( var lineDTO in quoteDTO.QuoteLines)
                     {
-                        var existingLine = existingQuote.QuoteLines.FirstOrDefault(l => l.Id == updatedLine.Id);
-                        if ( existingLine != null )
+                        existingQuote.QuoteLines.Add(new QuoteLine
                         {
-                            existingLine.Description = updatedLine.Description;
-                            existingLine.Quantity = updatedLine.Quantity;
-                            existingLine.UnitPrice = updatedLine.UnitPrice;
-                        }
-                        else
-                        {
-                            updatedLine.Id = Guid.NewGuid();
-                            existingQuote.QuoteLines.Add(existingLine);
-                        }
+                            Id = Guid.NewGuid(),
+                            Description = lineDTO.Description,
+                            Quantity = lineDTO.Quantity,
+                            UnitPrice = lineDTO.UnitPrice
+                        });
                     }
                     var updatedQuote = await _quoteRepository.UpdateQuoteAsync(existingQuote);
+
+                    await _statusService.ChangeStatusAsync(updatedQuote.Id, QuoteStatus.Draft);
+
                     return updatedQuote;
                 }
                 else
@@ -225,21 +232,30 @@ namespace EasyFacturation.AppServices.Services
 
                 if (originalQuote.Status == QuoteStatus.Sent)
                 {
-                    var correctionQuote = await CreateQuoteAsync(correctionDTO);
+                    var createDTO = new QuoteCreateDTO
+                    {
+                        Title = correctionDTO.Title,
+                        CreationDate = correctionDTO.CreationDate,
+                        ExpirationDate = correctionDTO.ExpirationDate,
+                        Subtotal = correctionDTO.Subtotal,
+                        Total = correctionDTO.Total,
+                        TaxeRate = correctionDTO.TaxeRate,
+                        ClientId = correctionDTO.ClientId,
+                        QuoteLines = correctionDTO.QuoteLines
+                    };
+
+                    var correctionQuote = await CreateQuoteAsync(createDTO);
 
                     correctionQuote.OriginalQuoteId = originalQuoteId;
 
-                    originalQuote.CorrectionQuoteId = correctionQuote.Id;
-                    
-                    originalQuote.Status = QuoteStatus.Archived;
-                    await _quoteRepository.UpdateQuoteAsync(originalQuote);
+                    await _statusService.ChangeStatusAsync(originalQuote.Id, QuoteStatus.Archived);
 
                     await transaction.CommitAsync();
                     return correctionQuote;
                 }
                 else
                 {
-                    throw new QuoteNotFoundException(Ressources.ValidationMessage.QuoteNotSentStatusErrorMessage);
+                    throw new QuoteServiceException(Ressources.ValidationMessage.QuoteNotSentStatusErrorMessage);
                 }
             }
             catch (Exception dbEx)
@@ -248,6 +264,13 @@ namespace EasyFacturation.AppServices.Services
                 await transaction.RollbackAsync();
                 throw new QuoteServiceException(Ressources.ValidationMessage.CreatingQuoteErrorMessage);
             }
+        }
+
+        public async Task SendQuoteAsync(Guid quoteId)
+        {
+            await _statusService.ChangeStatusAsync(quoteId, QuoteStatus.Sent);
+
+            //Call here the PDF generation method
         }
     }
 }
