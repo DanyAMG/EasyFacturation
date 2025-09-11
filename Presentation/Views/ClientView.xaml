@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="EasyFacturation.Presentation.Views.ClientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:EasyFacturation.Presentation.Views">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="{Binding FullName}" FontSize="18" FontWeight="Bold"/>
+            <TextBlock Text="{Binding CompanyName}" FontSize="16"/>
+            <TextBlock Text="{Binding DisplayAddress}" FontSize="14"/>
+            <TextBlock Text="{Binding Email}" FontSize="14"/>
+            <TextBlock Text="{Binding Phone}" FontSize="14"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,20" >
+            <Button Content="Create Quote" Command="{Binding CreateQuoteCommand}" Margin="0,0,10,0"/>
+            <Button Content="Create Invoice" Command="{Binding CreateInvoiceCommand}" Margin="0,0,10,0"/>
+            <Button Content="Edit Client Info" Command="{Binding EditClientCommand}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Quotes and Invoices for this client will appear here." FontStyle="Italic"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

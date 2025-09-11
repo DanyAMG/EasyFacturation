@@ -82,7 +82,7 @@ namespace EasyFacturation.AppServices.Services
             }
         }
 
-        public async Task AddClientAsync(ClientCreateDTO clientDTO)
+        public async Task<Client> AddClientAsync(ClientCreateDTO clientDTO)
         {
             try
             {
@@ -107,6 +107,8 @@ namespace EasyFacturation.AppServices.Services
                 Validator.ValidateObject(client, validationContext, validateAllProperties: true);
 
                 var createdClient = await _clientRepository.CreateClientAsync(client);
+
+                return createdClient;
             }
             catch (ValidationException ex)
             {

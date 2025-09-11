@@ -18,9 +18,9 @@ namespace EasyFacturation.Presentation.Views
     /// <summary>
     /// Interaction logic for AddClientPage.xaml
     /// </summary>
-    public partial class EditClientView : UserControl
+    public partial class AddEditClientView : UserControl
     {
-        public EditClientView()
+        public AddEditClientView()
         {
             InitializeComponent();
         }
