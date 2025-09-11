@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using EasyFacturation.AppServices.Services;
 using EasyFacturation.Domain.Models;
 using EasyFacturation.Presentation.ViewModels.Items;
+using EasyFacturation.Presentation.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,19 +17,28 @@ namespace EasyFacturation.Presentation.ViewModels
     public partial class ClientListViewModel : ObservableObject
     {
         private readonly ClientService _clientService;
+        private readonly MainViewModel _mainViewModel;
 
         [ObservableProperty]
         private ObservableCollection<ClientListItem> clients = new();
 
-        public ClientListViewModel(ClientService clientService)
+        [ObservableProperty]
+        private ClientListItem selectedClient;
+
+        public IRelayCommand OpenClientCommand { get; }
+
+        public ClientListViewModel(ClientService clientService, MainViewModel mainViewModel)
         {
             _clientService = clientService;
+            _mainViewModel = mainViewModel;
+            OpenClientCommand = new RelayCommand(OpenClient);
         }
 
         public async Task InitializeAsync()
         {
             await LoadClientAsync();
         }
+
         public async Task LoadClientAsync()
         {
             var clientsFromDb = await GetAllClientsForListAsync();
@@ -38,10 +49,11 @@ namespace EasyFacturation.Presentation.ViewModels
         {
             var clients = await _clientService.GetAllClientsAsync();
 
-            return clients.Select(c=> new ClientListItem
+            return clients.Select(c => new ClientListItem
             {
                 Id = c.Id,
                 DisplayName = $"{c.FirstName} {c.LastName}",
+                CompanyName = c.CompanyName,
                 Email = c.Email,
                 Phone = c.Phone,
                 DisplayAdress = $"{(string.IsNullOrWhiteSpace(c.StreetNumber) ? "" : c.StreetNumber + " ")}" +
@@ -51,6 +63,21 @@ namespace EasyFacturation.Presentation.ViewModels
                                 $"{c.ZipCode} {c.City}"
 
             }).ToList();
+        }
+
+        private async void OpenClient()
+        {
+            if (selectedClient == null)
+            {
+                return;
+            }
+
+            var clientEntity = await _clientService.GetClientByIdAsync(SelectedClient.Id);
+
+            _mainViewModel.CurrentView = new ClientView()
+            {
+                DataContext = new ClientViewModel(clientEntity, _mainViewModel, _clientService)
+            };
         }
     }
 }

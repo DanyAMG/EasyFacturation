@@ -1,5 +1,4 @@
-﻿using EasyFacturation.Presentation.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,21 +16,13 @@ using System.Windows.Shapes;
 namespace EasyFacturation.Presentation.Views
 {
     /// <summary>
-    /// Interaction logic for SearchClientPage.xaml
+    /// Interaction logic for ClientView.xaml
     /// </summary>
-    public partial class ClientListView : UserControl
+    public partial class ClientView : UserControl
     {
-        public ClientListView()
+        public ClientView()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (DataContext is ClientListViewModel vm && vm.SelectedClient != null)
-            {
-                vm.OpenClientCommand.Execute(null);
-            }
         }
     }
 }

@@ -4,7 +4,7 @@
     <Grid Margin="20">
         <TextBlock Text="Clients" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <DataGrid ItemsSource="{Binding Clients}" AutoGenerateColumns="False" CanUserAddRows="False"
+        <DataGrid ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="DataGrid_MouseDoubleClick"
                   IsReadOnly="True" Margin="0,40,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding DisplayName}" />

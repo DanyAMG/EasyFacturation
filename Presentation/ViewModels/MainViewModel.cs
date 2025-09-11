@@ -18,6 +18,7 @@ namespace EasyFacturation.Presentation.ViewModels
         [ObservableProperty]
         private object _currentView;
         private ClientService _clientService;
+        private readonly MainViewModel _mainViewModel;
 
         public IRelayCommand NavigateHomeCommand { get; }
         public IRelayCommand NavigateClientListCommand { get; }
@@ -42,16 +43,16 @@ namespace EasyFacturation.Presentation.ViewModels
 
             NavigateClientListCommand = new RelayCommand(async () =>
             {
-                var clientListVM = new ClientListViewModel(_clientService);
+                var clientListVM = new ClientListViewModel(_clientService, this);
                 await clientListVM.InitializeAsync();
                 CurrentView = new ClientListView { DataContext = clientListVM };
             });
 
-            NavigateAddClientCommand = new RelayCommand(() => CurrentView = new AddClientView()
+            NavigateAddClientCommand = new RelayCommand(() => CurrentView = new AddEditClientView()
             {
-                DataContext = new AddClientViewModel(_clientService)
+                DataContext = new AddEditClientViewModel(_clientService, _mainViewModel)
             });
-            NavigateEditClientCommand = new RelayCommand(() => CurrentView = new EditClientView());
+            NavigateEditClientCommand = new RelayCommand(() => CurrentView = new AddEditClientView());
 
             NavigateQuoteListCommand = new RelayCommand(() => CurrentView = new QuoteListView());
             NavigateAddQuoteCommand = new RelayCommand(() => CurrentView = new AddQuoteView());
@@ -67,23 +68,22 @@ namespace EasyFacturation.Presentation.ViewModels
             NavigateInvoiceModelCommand = new RelayCommand(() => CurrentView = new InvoiceModelView());
             NavigateUserSettingsCommand = new RelayCommand(() => CurrentView = new UserSettingsView());
 
-            NavigateAddClientCommand = new RelayCommand(() => {
-                var addClientVM = new AddClientViewModel(_clientService);
-
-                // Définir ce qui se passe après création réussie
-                addClientVM.OnClientCreated = () => CurrentView = new ClientListView();
-
-                CurrentView = new AddClientView() { DataContext = addClientVM };
-            });
 
             NavigateAddClientCommand = new RelayCommand(() =>
             {
-                var addClientVM = new AddClientViewModel(_clientService);
+                var addClientVM = new AddEditClientViewModel(_clientService, this);
+                
+                addClientVM.OnClientCreated = (client) =>
+                {
+                   this.CurrentView = new ClientView
+                    {
+                        DataContext = new ClientViewModel(client, this, _clientService)
+                    };
+                };
 
-                addClientVM.OnClientCreated = () => CurrentView = new ClientListView();
                 addClientVM.OnCancel = () => CurrentView = new HomeView();
 
-                CurrentView = new AddClientView { DataContext = addClientVM };
+                CurrentView = new AddEditClientView { DataContext = addClientVM };
             });
 
             CurrentView = new HomeView();

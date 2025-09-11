@@ -4,6 +4,6 @@
              Height="400" Width="600">
 
     <Grid>
-        <TextBlock Text="MODEL DE DEVIS ICITE"/>
+        <TextBlock Text="MODELE DE DEVIS ICITE"/>
     </Grid>
 </UserControl>

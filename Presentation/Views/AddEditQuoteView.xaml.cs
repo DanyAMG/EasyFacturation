@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace EasyFacturation.Presentation.Views
 {
     /// <summary>
-    /// Interaction logic for AddClientPage.xaml
+    /// Interaction logic for AddEditQuoteView.xaml
     /// </summary>
-    public partial class AddClientView : UserControl
+    public partial class AddEditQuoteView : UserControl
     {
-        public AddClientView()
+        public AddEditQuoteView()
         {
             InitializeComponent();
         }
